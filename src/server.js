@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-// import { connectDB } from "./config/db.js";
+
 import { connectDB } from "../backend/config/db.js";
 
 import userRoute from "../backend/routes/user.route.js";
@@ -14,12 +14,10 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
-
-const __dirname = path.resolve();
-
 app.use("/api/user", userRoute);
 app.use("/api/recipe", recipeRoute);
+
+const PORT = process.env.PORT || 5000;
 
 if (process.env.NODE_ENV.trim() === "production") {
   const frontendPath = path.join(process.cwd(), "frontend", "dist");
@@ -30,7 +28,7 @@ if (process.env.NODE_ENV.trim() === "production") {
   });
 }
 
-app.listen(5000, () => {
+app.listen(PORT, () => {
   console.log("server is running on port 5000");
   connectDB();
 });
