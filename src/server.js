@@ -13,6 +13,7 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 
 const __dirname = path.resolve();
@@ -20,7 +21,7 @@ const __dirname = path.resolve();
 app.use("/api/user", userRoute);
 app.use("/api/recipe", recipeRoute);
 
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV.trim() === "production") {
   const frontendPath = path.join(process.cwd(), "frontend", "dist");
   app.use(express.static(frontendPath));
 
@@ -28,12 +29,6 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.join(frontendPath, "index.html"));
   });
 }
-
-console.log("Serving static files from:", path.join(__dirname));
-console.log(
-  "Resolved path:",
-  path.resolve(__dirname, "frontend", "dist", "index.html")
-);
 
 app.listen(5000, () => {
   console.log("server is running on port 5000");
