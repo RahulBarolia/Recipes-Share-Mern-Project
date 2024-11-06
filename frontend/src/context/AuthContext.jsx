@@ -1,6 +1,5 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
-import { FaSadCry } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
@@ -13,12 +12,9 @@ export const AuthProvider = ({ children }) => {
 
   const fetchUserData = async (token) => {
     try {
-      const response = await axios.get(
-        "http://localhost:5000/api/user/profile",
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      const response = await axios.get("/api/user/profile", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
       setUser(response.data);
     } catch (error) {
@@ -43,10 +39,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (credentials) => {
     try {
       setIsLoading(true);
-      const response = await axios.post(
-        "http://localhost:5000/api/user/login",
-        credentials
-      );
+      const response = await axios.post("/api/user/login", credentials);
 
       const { token } = response.data;
 
@@ -66,10 +59,7 @@ export const AuthProvider = ({ children }) => {
   const register = async (formData) => {
     try {
       setIsLoading(true);
-      const response = await axios.post(
-        "http://localhost:5000/api/user/signup",
-        formData
-      );
+      const response = await axios.post("/api/user/signup", formData);
       return response;
     } catch (error) {
       return error.response;

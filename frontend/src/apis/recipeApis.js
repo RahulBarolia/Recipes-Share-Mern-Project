@@ -2,10 +2,7 @@ import axios from "axios";
 
 export const addRecipe = async (recipeData) => {
   try {
-    const response = await axios.post(
-      "http://localhost:5000/api/recipe",
-      recipeData
-    );
+    const response = await axios.post("/api/recipe", recipeData);
     return response;
   } catch (error) {
     return error;
@@ -14,7 +11,7 @@ export const addRecipe = async (recipeData) => {
 
 export const getRecipes = async () => {
   try {
-    const response = await axios.get("http://localhost:5000/api/recipe");
+    const response = await axios.get("/api/recipe");
     return response;
   } catch (error) {
     return error;
@@ -23,9 +20,7 @@ export const getRecipes = async () => {
 
 export const deleteRecipeById = async (recipeId) => {
   try {
-    const response = await axios.delete(
-      `http://localhost:5000/api/recipe/${recipeId}/`
-    );
+    const response = await axios.delete(`/api/recipe/${recipeId}/`);
     return response;
   } catch (error) {
     return error;
@@ -34,10 +29,7 @@ export const deleteRecipeById = async (recipeId) => {
 
 export const updateRecipeById = async (recipeId, recipeData) => {
   try {
-    const response = await axios.put(
-      `http://localhost:5000/api/recipe/${recipeId}/`,
-      recipeData
-    );
+    const response = await axios.put(`/api/recipe/${recipeId}/`, recipeData);
     return response;
   } catch (error) {
     return error;
