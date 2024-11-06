@@ -20,13 +20,20 @@ const __dirname = path.resolve();
 app.use("/api/user", userRoute);
 app.use("/api/recipe", recipeRoute);
 
-if (process.env.NODE_ENV.trim() === "production") {
-  app.use(express.static(path.join(__dirname, "/frontend/dist")));
+if (process.env.NODE_ENV === "production") {
+  const frontendPath = path.join(process.cwd(), "frontend", "dist");
+  app.use(express.static(frontendPath));
 
   app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+    res.sendFile(path.join(frontendPath, "index.html"));
   });
 }
+
+console.log("Serving static files from:", path.join(__dirname));
+console.log(
+  "Resolved path:",
+  path.resolve(__dirname, "frontend", "dist", "index.html")
+);
 
 app.listen(5000, () => {
   console.log("server is running on port 5000");
