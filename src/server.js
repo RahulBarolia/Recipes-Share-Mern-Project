@@ -1,8 +1,10 @@
 import express from "express";
 import dotenv from "dotenv";
-import { connectDB } from "./config/db.js";
-import userRoute from "./routes/user.route.js";
-import recipeRoute from "./routes/recipe.route.js";
+// import { connectDB } from "./config/db.js";
+import { connectDB } from "../backend/config/db.js";
+
+import userRoute from "../backend/routes/user.route.js";
+import recipeRoute from "../backend/routes/recipe.route.js";
 import cors from "cors";
 import path from "path";
 
